@@ -12,7 +12,8 @@ RUN apt-get update && \
     pip3 install ipywidgets
     jupyter nbextension install --py widgetsnbextension
     jupyter nbextension enable --sys-prefix --py widgetsnbextension
-
+    jupyter labextension install @jupyterlab/hub-extension
+    
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #RUN mkdir /etc/certs
@@ -66,4 +67,4 @@ COPY jupyter_notebook_config.py /home/fenics/.jupyter/jupyter_notebook_config.py
 ENV NUMBER_OF_USERS 10
 WORKDIR /home/fenics/
 ENTRYPOINT ["/sbin/my_init","--"]
-CMD ["jupyterlab"]
+CMD ["jupyter labhub"]
