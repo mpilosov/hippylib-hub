@@ -135,7 +135,7 @@
 # Path to SSL key file for the public facing interface of the proxy
 #
 # Use with ssl_cert
-c.JupyterHub.ssl_key = '/home/fenics/ca/privkey.pem'
+# c.JupyterHub.ssl_key = '/home/fenics/ca/privkey.pem'
 
 # The config file to load
 # c.JupyterHub.config_file = 'jupyterhub_config.py'
@@ -143,7 +143,7 @@ c.JupyterHub.ssl_key = '/home/fenics/ca/privkey.pem'
 # Path to SSL certificate file for the public facing interface of the proxy
 #
 # Use with ssl_key
-c.JupyterHub.ssl_cert = '/home/fenics/ca/fullchain.pem'
+# c.JupyterHub.ssl_cert = '/home/fenics/ca/fullchain.pem'
 
 # Whether to shutdown the proxy when the Hub shuts down.
 #
