@@ -6,9 +6,12 @@ USER root
 RUN apt-get update && \
     apt-get install -yy pwgen npm nodejs-legacy python3-pip && \
     npm install -g configurable-http-proxy && \
-    pip3 install jupyterhub==0.8.1 && \
-    pip3 install ipython[notebook]==6.2.1 && \
-    pip install jupyterlab
+    pip3 install jupyter notebook && \
+    pip3 install jupyterhub && \
+    pip3 install jupyterlab
+    pip3 install ipywidgets
+    jupyter nbextension install --py widgetsnbextension
+    jupyter nbextension enable --sys-prefix --py widgetsnbextension
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -33,11 +36,16 @@ RUN cd /home/fenics && \
 RUN cd /home/fenics/Installations && \
     git clone https://github.com/hippylib/hippylib.git && \
     chmod -R o+rx hippylib
+
+# Install ConsistentBayes
+RUN cd /home/fenics/Installations && \
+    git clone https://github.com/mpilosov/consistentbayes.git && \
+    chmod -R o+rx ConsistentBayes
     
 # Copy the notebooks
 RUN cd /home/fenics/Installations && \
     git clone https://github.com/g2s3-2018/labs.git
-
+    
 COPY python3_config.json /usr/local/share/jupyter/kernels/python3/kernel.json
 ENV LD_LIBRARY_PATH /home/fenics/Installations/MUQ_INSTALL/lib:/home/fenics/Installations/MUQ_INSTALL/muq_external/lib
 ENV PYTHONPATH /home/fenics/Installations/MUQ_INSTALL/lib
@@ -55,7 +63,7 @@ RUN mkdir -p /home/fenics/.jupyter
 COPY jupyter_notebook_config.py /home/fenics/.jupyter/jupyter_notebook_config.py
 
 
-ENV NUMBER_OF_USERS 60
+ENV NUMBER_OF_USERS 10
 WORKDIR /home/fenics/
 ENTRYPOINT ["/sbin/my_init","--"]
-CMD ["jupyterhub"]
+CMD ["jupyterlab"]
