@@ -8,10 +8,10 @@ RUN apt-get update && \
     npm install -g configurable-http-proxy && \
     pip3 install jupyter notebook && \
     pip3 install jupyterhub && \
-    pip3 install jupyterlab
-    pip3 install ipywidgets
-    jupyter nbextension install --py widgetsnbextension
-    jupyter nbextension enable --sys-prefix --py widgetsnbextension
+    pip3 install jupyterlab && \
+    pip3 install ipywidgets && \
+    jupyter nbextension install --py widgetsnbextension && \
+    jupyter nbextension enable --sys-prefix --py widgetsnbextension && \
     jupyter labextension install @jupyterlab/hub-extension
     
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
